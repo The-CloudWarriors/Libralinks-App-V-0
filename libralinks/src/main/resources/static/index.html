@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libralinks - Cloud Warriors</title>
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #374151;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Main Container with some padding -->
+    <div class="mx-auto p-4 sm:p-6 lg:p-8">
+
+        <!-- Header Section -->
+        <header class="bg-white rounded-xl shadow-md p-4 sm:p-6 mb-8 flex flex-col sm:flex-row justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <!-- Simple SVG logo based on the doc's style -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 016.5 17H20v-5H6.5a2.5 2.5 0 000 5H20"/>
+                    <path d="M6 15a2 2 0 100-4 2 2 0 000 4z"/>
+                    <path d="M10 2a2 2 0 100 4 2 2 0 000-4z"/>
+                    <path d="M14 10a2 2 0 100 4 2 2 0 000-4z"/>
+                    <path d="M18 6a2 2 0 100 4 2 2 0 000-4z"/>
+                </svg>
+                <div class="text-xl sm:text-2xl font-bold tracking-tight text-gray-800">Libralinks</div>
+            </div>
+            <nav class="mt-4 sm:mt-0">
+                <ul class="flex space-x-4 sm:space-x-6 text-sm sm:text-base font-medium">
+                    <li><a href="#about" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">About</a></li>
+                    <li><a href="#features" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">Features</a></li>
+                    <li><a href="#team" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">Team</a></li>
+                    <li><a href="#contact" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <main class="text-center mb-12 lg:mb-16">
+            <div class="bg-white rounded-xl shadow-lg p-6 sm:p-10 lg:p-16">
+                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-4 leading-tight">
+                    Helping readers find libraries near them with one simple search.
+                </h1>
+                <p class="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto mb-8">
+                    The Online Library Database System is a nationwide platform designed to connect individuals with libraries across the country.
+                </p>
+                <a href="https://www.libralinks.com" target="_blank" class="inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-300">
+                    Visit Libralinks
+                </a>
+            </div>
+        </main>
+
+        <!-- Search Bar Section -->
+        <section id="search-section" class="mb-12 lg:mb-16">
+            <div class="bg-white rounded-xl shadow-lg p-6 sm:p-10 lg:p-16">
+                <h2 class="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-6">Find Your Local Library</h2>
+                <form id="search-form" class="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4 items-end">
+                    <div>
+                        <label for="city-input" class="block text-sm font-medium text-gray-700 mb-1">City</label>
+                        <input type="text" id="city-input" placeholder="e.g., San Francisco" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 transition-colors duration-200 p-2 border">
+                    </div>
+                    <div>
+                        <label for="state-input" class="block text-sm font-medium text-gray-700 mb-1">State</label>
+                        <input type="text" id="state-input" placeholder="e.g., CA" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 transition-colors duration-200 p-2 border">
+                    </div>
+                    <div>
+                        <label for="zip-input" class="block text-sm font-medium text-gray-700 mb-1">ZIP Code</label>
+                        <input type="text" id="zip-input" placeholder="e.g., 94103" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 transition-colors duration-200 p-2 border">
+                    </div>
+                    <button type="submit" class="w-full sm:col-span-3 bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-300 mt-4 sm:mt-0">
+                        Search Libraries
+                    </button>
+                </form>
+
+                <!-- Search Results Section -->
+                <div id="results-container" class="mt-8">
+                    <p id="loading-message" class="text-center text-gray-500 hidden">Searching...</p>
+                    <div id="results-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Search results will be dynamically inserted here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About/Problem & Solution Section -->
+        <section id="about" class="mb-12 lg:mb-16">
+            <div class="bg-white rounded-xl shadow-lg p-6 sm:p-10 lg:p-16">
+                <h2 class="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-6">Our Mission</h2>
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-700">The Problem</h3>
+                        <p class="text-gray-600">
+                            Finding accurate and current information about local libraries can be surprisingly difficult. Whether you're relocating, traveling, or simply seeking a digital library, you're often met with outdated directories, broken links, or incomplete listings—making a simple search unexpectedly frustrating.
+                        </p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-700">The Solution</h3>
+                        <p class="text-gray-600">
+                            The Online Library Database System (OLDS) is a centralized, cloud-based web application designed to provide users with seamless access to libraries across the country. It offers a streamlined, location-based search interface that empowers users to find libraries quickly.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Features Section -->
+        <section id="features" class="mb-12 lg:mb-16">
+            <div class="bg-white rounded-xl shadow-lg p-6 sm:p-10 lg:p-16">
+                <h2 class="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-8">Key Features</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Feature Card 1 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center hover:bg-blue-50 transition-colors duration-200">
+                        <div class="mb-4">
+                            <!-- SVG Icon for Smart Search -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="M21 21L16.65 16.65"></path>
+                                <path d="M13 8h-4"></path>
+                                <path d="M11 6v4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-800">Smart Search Filters</h3>
+                        <p class="text-gray-600 text-sm mt-2">Browse effortlessly by state, city, or ZIP code, delivering custom results in seconds.</p>
+                    </div>
+                    <!-- Feature Card 2 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center hover:bg-blue-50 transition-colors duration-200">
+                        <div class="mb-4">
+                            <!-- SVG Icon for Direct Access -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path>
+                                <path d="M15 3h6v6"></path>
+                                <path d="M10 14L21 3"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-800">Direct Access Links</h3>
+                        <p class="text-gray-600 text-sm mt-2">One-click links drive users straight to the library's official site—no more frustrating detours.</p>
+                    </div>
+                    <!-- Feature Card 3 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center hover:bg-blue-50 transition-colors duration-200">
+                        <div class="mb-4">
+                            <!-- SVG Icon for User-Friendly -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14"></path>
+                                <path d="M12 5l7 7-7 7"></path>
+                                <path d="M19 12l-7 7"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-800">User-Friendly Interface</h3>
+                        <p class="text-gray-600 text-sm mt-2">Responsive and intuitive design, built to be welcoming for users of every age and tech comfort level.</p>
+                    </div>
+                    <!-- Feature Card 4 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center hover:bg-blue-50 transition-colors duration-200">
+                        <div class="mb-4">
+                            <!-- SVG Icon for Scalable -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 18v-6"></path>
+                                <path d="M12 6v6"></path>
+                                <path d="M18 12h-6"></path>
+                                <path d="M6 12h6"></path>
+                                <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-800">Scalable Architecture</h3>
+                        <p class="text-gray-600 text-sm mt-2">Powered by Amazon Web Services for high uptime, fast performance, and seamless scalability.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonial Section -->
+        <section id="testimonial" class="mb-12 lg:mb-16">
+            <div class="bg-white rounded-xl shadow-lg p-6 sm:p-10 lg:p-16 flex flex-col items-center">
+                <blockquote class="text-center italic text-xl sm:text-2xl text-gray-800 mb-4">
+                    "When I moved to a new city, I had no idea where the local library was. This system helped me find one in less than a minute. It saved me time and frustration!"
+                </blockquote>
+                <p class="text-gray-600 font-medium">— Sarah M., Beta User</p>
+            </div>
+        </section>
+
+        <!-- Meet the Team Section -->
+        <section id="team" class="mb-12 lg:mb-16">
+            <div class="bg-white rounded-xl shadow-lg p-6 sm:p-10 lg:p-16">
+                <h2 class="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-8">Meet the Team</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-6">
+                    <!-- Team Member Card: Charishma Sattaru -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center flex flex-col items-center">
+                        <img class="w-24 h-24 rounded-full mb-4 object-cover" src="https://placehold.co/150x150/e5e7eb/6b7280?text=CS" alt="Charishma Sattaru">
+                        <h3 class="text-lg font-semibold text-gray-800">Charishma Sattaru</h3>
+                        <p class="text-sm text-gray-600">Infrastructure Specialist & DevOps Engineer</p>
+                    </div>
+                    <!-- Team Member Card: Diana Fernandes -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center flex flex-col items-center">
+                        <img class="w-24 h-24 rounded-full mb-4 object-cover" src="https://placehold.co/150x150/e5e7eb/6b7280?text=DF" alt="Diana Fernandes">
+                        <h3 class="text-lg font-semibold text-gray-800">Diana Fernandes</h3>
+                        <p class="text-sm text-gray-600">Cloud Architect & Senior DBA</p>
+                    </div>
+                    <!-- Team Member Card: Lewis Fung -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center flex flex-col items-center">
+                        <img class="w-24 h-24 rounded-full mb-4 object-cover" src="https://placehold.co/150x150/e5e7eb/6b7280?text=LF" alt="Lewis Fung">
+                        <h3 class="text-lg font-semibold text-gray-800">Lewis Fung</h3>
+                        <p class="text-sm text-gray-600">AWS Solutions Architect</p>
+                    </div>
+                    <!-- Team Member Card: Mittal Jain -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center flex flex-col items-center">
+                        <img class="w-24 h-24 rounded-full mb-4 object-cover" src="https://placehold.co/150x150/e5e7eb/6b7280?text=MJ" alt="Mittal Jain">
+                        <h3 class="text-lg font-semibold text-gray-800">Mittal Jain</h3>
+                        <p class="text-sm text-gray-600">Front-End Developer & Cloud Engineer</p>
+                    </div>
+                    <!-- Team Member Card: Sade Olotu -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center flex flex-col items-center">
+                        <img class="w-24 h-24 rounded-full mb-4 object-cover" src="https://placehold.co/150x150/e5e7eb/6b7280?text=SO" alt="Sade Olotu">
+                        <h3 class="text-lg font-semibold text-gray-800">Sade Olotu</h3>
+                        <p class="text-sm text-gray-600">Cloud Architect</p>
+                    </div>
+                    <!-- Team Member Card: Serenity Fox -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center flex flex-col items-center">
+                        <img class="w-24 h-24 rounded-full mb-4 object-cover" src="https://placehold.co/150x150/e5e7eb/6b7280?text=SF" alt="Serenity Fox">
+                        <h3 class="text-lg font-semibold text-gray-800">Serenity Fox</h3>
+                        <p class="text-sm text-gray-600">Project Manager</p>
+                    </div>
+                    <!-- Team Member Card: Swati Patil -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center flex flex-col items-center">
+                        <img class="w-24 h-24 rounded-full mb-4 object-cover" src="https://placehold.co/150x150/e5e7eb/6b7280?text=SP" alt="Swati Patil">
+                        <h3 class="text-lg font-semibold text-gray-800">Swati Patil</h3>
+                        <p class="text-sm text-gray-600">Java Backend Developer & Cloud Engineer</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact/Call to Action Footer -->
+        <footer id="contact" class="bg-blue-600 text-white p-6 sm:p-10 lg:p-16 rounded-xl shadow-lg text-center">
+            <h2 class="text-2xl sm:text-3xl font-bold mb-4">Connect. Learn. Grow.</h2>
+            <p class="text-lg mb-6 max-w-2xl mx-auto">
+                Libraries are more than buildings—they're gateways to ideas, learning, and opportunity. Now, finding your nearest library is just a click away.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-8 text-sm sm:text-base mb-6">
+                <div>
+                    <span class="font-bold">Website:</span>
+                    <a href="https://www.libralinks.com" target="_blank" class="block underline mt-1 hover:text-blue-200 transition-colors duration-200">www.libralinks.com</a>
+                </div>
+                <div>
+                    <span class="font-bold">Email:</span>
+                    <a href="mailto:contact@libralinks.com" class="block underline mt-1 hover:text-blue-200 transition-colors duration-200">contact@libralinks.com</a>
+                </div>
+            </div>
+            <p class="mt-8 text-sm text-blue-200">&copy; 2025 Cloud Warriors. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+<script>
+    // Exponential backoff for API calls
+    async function exponentialBackoff(func, maxRetries = 5, delay = 1000) {
+        for (let i = 0; i < maxRetries; i++) {
+            try {
+                return await func();
+            } catch (error) {
+                if (error.status === 429 && i < maxRetries - 1) { // 429 Too Many Requests
+                    await new Promise(resolve => setTimeout(resolve, delay * Math.pow(2, i)));
+                } else {
+                    throw error;
+                }
+            }
+        }
+    }
+
+    // Function to render the library search results
+    function renderResults(libraries) {
+        const resultsList = document.getElementById('results-list');
+        resultsList.innerHTML = '';
+        if (libraries.length === 0) {
+            resultsList.innerHTML = '<p class="text-center text-gray-500">No libraries found. Please try a different search.</p>';
+            return;
+        }
+
+        libraries.forEach(library => {
+            const card = document.createElement('div');
+            card.className = 'bg-gray-50 p-6 rounded-lg shadow-md flex flex-col space-y-2';
+            card.innerHTML = `
+                <h4 class="text-lg font-semibold text-gray-800">${library.name}</h4>
+                <p class="text-sm text-gray-600">${library.address}</p>
+                <p class="text-sm text-gray-600 font-medium">Hours: ${library.hours}</p>
+            `;
+            resultsList.appendChild(card);
+        });
+    }
+
+    // Function to handle the form submission and API call
+    document.getElementById('search-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const city = document.getElementById('city-input').value;
+        const state = document.getElementById('state-input').value;
+        const zip = document.getElementById('zip-input').value;
+
+        if (!city && !state && !zip) {
+            alert('Please enter a city, state, or ZIP code to search.');
+            return;
+        }
+
+        const loadingMessage = document.getElementById('loading-message');
+        const resultsList = document.getElementById('results-list');
+        loadingMessage.classList.remove('hidden');
+        resultsList.innerHTML = '';
+
+        const prompt = Generate a JSON object with an array of 3-5 fictional public libraries in the United States, based on the following search criteria. The JSON should have a 'libraries' key. Each library object should have 'name' (string), 'address' (string), and 'hours' (string). The location is ${city ? 'City: ' + city : ''}, ${state ? 'State: ' + state : ''}, ${zip ? 'ZIP: ' + zip : ''}. Make the data realistic.;
+
+        try {
+            const chatHistory = [];
+            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+            const payload = {
+                contents: chatHistory,
+                generationConfig: {
+                    responseMimeType: "application/json",
+                    responseSchema: {
+                        "type": "OBJECT",
+                        "properties": {
+                            "libraries": {
+                                "type": "ARRAY",
+                                "items": {
+                                    "type": "OBJECT",
+                                    "properties": {
+                                        "name": { "type": "STRING" },
+                                        "address": { "type": "STRING" },
+                                        "hours": { "type": "STRING" }
+                                    },
+                                    "propertyOrdering": ["name", "address", "hours"]
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            const apiKey = "";
+            const apiUrl = https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey};
+
+            const response = await exponentialBackoff(() => fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }));
+            
+            const result = await response.json();
+            
+            if (result.candidates && result.candidates.length > 0 &&
+                result.candidates[0].content && result.candidates[0].content.parts &&
+                result.candidates[0].content.parts.length > 0) {
+                const jsonText = result.candidates[0].content.parts[0].text;
+                const parsedJson = JSON.parse(jsonText);
+                renderResults(parsedJson.libraries || []);
+            } else {
+                renderResults([]);
+            }
+        } catch (error) {
+            console.error('API call failed:', error);
+            renderResults([]);
+        } finally {
+            loadingMessage.classList.add('hidden');
+        }
+    });
+</script>
+</html>
